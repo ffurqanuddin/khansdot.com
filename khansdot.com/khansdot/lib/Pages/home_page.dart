@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../components/dialogs.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -92,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       );
     //********//
     ///Floating Animation
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         _floatingButtonAnimation = true;
       });
@@ -101,40 +103,17 @@ class _HomePageState extends State<HomePage> {
     //Internet Connectivity
     _connectivitySubcription =
         Connectivity().onConnectivityChanged.listen((result) {
-      if (result == ConnectivityResult.none ||
+      if (result != ConnectivityResult.wifi ||
           result != ConnectivityResult.mobile) {
-        showDialog(
-          context: context,
-          builder: (context) => Dialog(
-            alignment: Alignment.center,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Lottie.asset("images/nointernet.json"),
-                //Okay
-                CupertinoButton(
-                    color: Colors.pink,
-                    child: const Text("Okay"),
-                    onPressed: () {
-                      if (result == ConnectivityResult.mobile ||
-                          result == ConnectivityResult.wifi) {
-                        Navigator.pop(context);
-                      }
-                    }),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
-          ),
-        );
+        ///Show No internet Dialog
+        showNoInternetDialog(context);
+
       }
       //////*******Init State *******//////////
     });
   }
+
+
 
   ///Dispose Method
   @override

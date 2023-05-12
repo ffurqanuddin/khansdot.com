@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
     });
 
     ///Navigate to HomePage
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacementNamed(context, Routes.home);
     });
   }
@@ -52,12 +52,14 @@ class _SplashPageState extends State<SplashPage> {
             padding: const EdgeInsets.only(bottom: 20),
             child: Align(
               alignment: Alignment.bottomCenter,
-              child:Column(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   //Text
-                 const Text("Made by", style: TextStyle(fontSize: 10),),
-
+                  const Text(
+                    "Made by",
+                    style: TextStyle(fontSize: 10),
+                  ),
 
                   //Animated Text
                   AnimatedTextKit(
@@ -65,8 +67,7 @@ class _SplashPageState extends State<SplashPage> {
                       WavyAnimatedText('Yasir Khan'),
                     ],
                     isRepeatingAnimation: true,
-                    onTap: () {
-                    },
+                    onTap: () {},
                   ),
                 ],
               ),
@@ -79,7 +80,7 @@ class _SplashPageState extends State<SplashPage> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: AutoSizeText(
-                "version 1.0",
+                "version 1.1",
                 textAlign: TextAlign.end,
                 style: TextStyle(
                     color: Colors.black,
